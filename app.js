@@ -70,7 +70,6 @@ const myChart = new Chart(ctx, {
             y: {
                 beginAtZero: false
             }
-        },
-        responsive: true
+        }
     }
 });
