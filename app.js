@@ -17,25 +17,60 @@ function findPeaks(arr) {
     console.log("The peaks of the dataset: " + peaks);
     } 
 
+    const indexArr = [];
+    const heightArr = [];
+    const weightArr = [];
+
     async function readCSV() {
-        let url = 'test.csv';
+        let url = 'hw_200.csv';
         const response = await fetch(url);
         const data = await response.text();
         let table = data.split('\n').splice(1);
         // console.log(table);
-        const height = [];
-        const weight = []
+
         table.forEach(element => {
             
             column = element.split(',');
             // console.log(column);
-            height.push(column[1]);
-            weight.push(column[2]);
+            column[0] = parseFloat(column[0]);
+            column[1] = parseFloat(column[1]);
+            column[2] = parseFloat(column[2]);
+
+            indexArr.push(column[0]);
+            heightArr.push(column[1]);
+            weightArr.push(column[2]);
         });
-        console.log(height);
+        // console.log(heightArr);
         // findPeaks(height);
     }
 
 readCSV();
 
-
+const ctx = document.querySelector('#myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: indexArr,
+        datasets: [{
+            label: '# of Votes',
+            data: weightArr,
+            backgroundColor: [
+                'rgba(0, 0, 0, 0.4)'
+   
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 0.8)'
+      
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: false
+            }
+        },
+        responsive: true
+    }
+});
