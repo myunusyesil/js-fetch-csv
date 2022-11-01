@@ -51,12 +51,25 @@ function findPeaks(arr) {
 
 const ctx = document.querySelector('#myChart').getContext('2d');
 const myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: indexArr,
         datasets: [{
-            label: '# of Votes',
+            label: 'Weight',
             data: weightArr,
+            backgroundColor: [
+                'rgba(250, 0, 0, 0.4)'
+   
+            ],
+            borderColor: [
+                'rgba(250, 0, 0, 0.8)'
+      
+            ],
+            borderWidth: 1
+        },
+        {
+            label: 'Height',
+            data: heightArr,
             backgroundColor: [
                 'rgba(0, 0, 0, 0.4)'
    
