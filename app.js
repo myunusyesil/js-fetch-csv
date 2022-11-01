@@ -1,4 +1,5 @@
 
+
 // declare an array 
 const numArr = [42,29,55,1,2,6,3,4,5,22,56,23,8,19];
 
@@ -41,10 +42,12 @@ function findPeaks(arr) {
             weightArr.push(column[2]);
         });
         // console.log(heightArr);
-        // findPeaks(height);
+        findPeaks(heightArr); // when the data is ready we can find peaks via func
+        console.log("Finished fetching the data")
+        myChart.update(); // we need to update chart when we fetch the data
     }
 
-readCSV();
+    readCSV();
 
 const ctx = document.querySelector('#myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -70,6 +73,10 @@ const myChart = new Chart(ctx, {
             y: {
                 beginAtZero: false
             }
-        }
+        },
+        responsive: true,
+        
     }
 });
+
+
