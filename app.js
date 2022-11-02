@@ -18,11 +18,13 @@ function findPeaks(arr) {
     console.log("The peaks of the dataset: " + peaks);
     } 
 
-    const indexArr = [];
-    const heightArr = [];
-    const weightArr = [];
 
     async function readCSV() {
+        
+        const indexArr = [];
+        const heightArr = [];
+        const weightArr = [];
+
         let url = 'hw_200.csv';
         const response = await fetch(url);
         const data = await response.text();
@@ -42,41 +44,42 @@ function findPeaks(arr) {
             weightArr.push(column[2]);
         });
         // console.log(heightArr);
-        findPeaks(heightArr); // when the data is ready we can find peaks via func
-        console.log("Finished fetching the data")
-        myChart.update(); // we need to update chart when we fetch the data
+        // findPeaks(heightArr); // when the data is ready we can find peaks via func
+        // console.log("Finished fetching the data")
+         // we need to update chart when we fetch the data
+
+        return {indexArr, heightArr, weightArr};
     }
 
-    readCSV();
 
-const ctx = document.querySelector('#myChart').getContext('2d');
-const myChart = new Chart(ctx, {
+    async function chartIt() {
+    const testData = await readCSV();
+    // console.log(testData)
+
+    const ctx = document.querySelector('#myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: indexArr,
+        labels: testData.indexArr,
         datasets: [{
             label: 'Weight',
-            data: weightArr,
+            data: testData.weightArr,
             backgroundColor: [
                 'rgba(250, 0, 0, 0.4)'
-   
             ],
             borderColor: [
                 'rgba(250, 0, 0, 0.8)'
-      
             ],
             borderWidth: 1
         },
         {
             label: 'Height',
-            data: heightArr,
+            data: testData.heightArr,
             backgroundColor: [
                 'rgba(0, 0, 0, 0.4)'
-   
             ],
             borderColor: [
                 'rgba(0, 0, 0, 0.8)'
-      
             ],
             borderWidth: 1
         }]
@@ -91,5 +94,13 @@ const myChart = new Chart(ctx, {
         
     }
 });
+
+    myChart.update();
+} 
+
+chartIt();
+                
+
+
 
 
