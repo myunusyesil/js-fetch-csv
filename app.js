@@ -28,7 +28,7 @@ function findPeaks(arr) {
         const x2 = [];
         const x3 = [];
 
-        let url = 'hw_200.csv';
+        let url = 'portfoy-deneme.csv';
         const response = await fetch(url);
         const data = await response.text();
         let table = data.split('\n').splice(1);
@@ -38,7 +38,7 @@ function findPeaks(arr) {
             
             column = element.split(',');
             // console.log(column);
-            column[0] = parseFloat(column[0]);
+            // column[0] = parseFloat(column[0]);
             column[1] = parseFloat(column[1]);
             column[2] = parseFloat(column[2]);
 
@@ -55,47 +55,74 @@ function findPeaks(arr) {
     async function chartIt() {
 
     // calling csv data to initialize chart will use it on
-    const testData = await readCSV();
+    const csvData = await readCSV();
     // console.log("Finished fetching the data")
     // console.log(testData)
 
     const ctx = document.querySelector('#myChart').getContext('2d');
     const myChart = new Chart(ctx, {
-    type: 'line',
+    
     data: {
-        labels: testData.x1,
+        labels: csvData.x1,
         datasets: [{
-            label: 'Weight (pounds)',
-            data: testData.x2,
-            backgroundColor: [
-                'rgba(250, 0, 0, 0.4)'
-            ],
-            borderColor: [
-                'rgba(250, 0, 0, 0.8)'
-            ],
-            borderWidth: 1
-        },
-        {
-            label: 'Height (inch)',
-            data: testData.x3,
+            type: 'bar',
+            label: 'TRY (₺)',
+            data: csvData.x2,
+            yAxisID: 'A',
             backgroundColor: [
                 'rgba(0, 0, 0, 0.4)'
             ],
             borderColor: [
                 'rgba(0, 0, 0, 0.8)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            
+        },
+        {
+            type: 'line',
+            label: 'DOLLARS ($)',
+            yAxisID: 'B',
+            data: csvData.x3,
+            backgroundColor: [
+                'rgba(0, 240, 0, 0.4)'
+            ],
+            borderColor: [
+                'rgba(0, 240, 0, 0.8)'
+            ],
+            borderWidth: 1,
+            
         }]
     },
     options: {
         scales: {
-            y: {
+            A: {
+                type: 'linear',
+                position: 'left',
                 beginAtZero: false
+                
+            },
+            B: {
+                type: 'linear',
+                position: 'right',
+                ticks: {
+                    max: 1,
+                    min: 0
+                }
+                                
             }
         },
         responsive: true,
-        tension: 0.5
-        
+        tension: 0.5,
+        animations: {
+            tension: {
+              duration: 1500,
+              easing: 'linear',
+              from: 1,
+              to: 0,
+              loop: true
+            }
+          },
+      
     }
 });
 
