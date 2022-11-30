@@ -70,10 +70,10 @@ function findPeaks(arr) {
             data: csvData.x2,
             yAxisID: 'A',
             backgroundColor: [
-                'rgba(0, 0, 0, 0.4)'
+                'rgba(72,61,139, 0.4)'
             ],
             borderColor: [
-                'rgba(0, 0, 0, 0.8)'
+                'rgba(72,61,139, 0.8)'
             ],
             borderWidth: 1,
             
@@ -84,10 +84,10 @@ function findPeaks(arr) {
             yAxisID: 'B',
             data: csvData.x3,
             backgroundColor: [
-                'rgba(0, 240, 0, 0.4)'
+                'rgba(60,179, 113, 0.4)'
             ],
             borderColor: [
-                'rgba(0, 240, 0, 0.8)'
+                'rgba(60,179, 113, 0.8)'
             ],
             borderWidth: 1,
             
@@ -113,15 +113,15 @@ function findPeaks(arr) {
         },
         responsive: true,
         tension: 0.5,
-        animations: {
-            tension: {
-              duration: 1500,
-              easing: 'linear',
-              from: 1,
-              to: 0,
-              loop: true
-            }
-          },
+        // animations: {
+        //     tension: {
+        //       duration: 1500,
+        //       easing: 'linear',
+        //       from: 1,
+        //       to: 0,
+        //       loop: true
+        //     }
+        //   },
       
     }
 });
