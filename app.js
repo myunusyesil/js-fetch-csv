@@ -28,7 +28,7 @@ function findPeaks(arr) {
         const x2 = [];
         const x3 = [];
 
-        let url = 'portfoy-deneme.csv';
+        let url = 'portfoy.csv';
         const response = await fetch(url);
         const data = await response.text();
         let table = data.split('\n').splice(1);
@@ -68,9 +68,9 @@ function findPeaks(arr) {
             type: 'bar',
             label: 'TRY (₺)',
             data: csvData.x2,
-            yAxisID: 'A',
+            yAxisID: 'B',
             backgroundColor: [
-                'rgba(72,61,139, 0.4)'
+                'rgba(72,61,139, 0.6)'
             ],
             borderColor: [
                 'rgba(72,61,139, 0.8)'
@@ -81,15 +81,15 @@ function findPeaks(arr) {
         {
             type: 'line',
             label: 'DOLLARS ($)',
-            yAxisID: 'B',
+            yAxisID: 'A',
             data: csvData.x3,
             backgroundColor: [
-                'rgba(60,179, 113, 0.4)'
+                'rgba(60,179, 113, 0.6)'
             ],
             borderColor: [
                 'rgba(60,179, 113, 0.8)'
             ],
-            borderWidth: 1,
+            borderWidth: 2,
             
         }]
     },
